@@ -704,11 +704,9 @@
       status.style.display = 'none';
 
       const templateParams = {
-        from_name:  `${firstName} ${lastName}`.trim(),
-        from_email: email,
-        reason:     reason,
-        message:    message,
-        to_email:   'johnkwao265@gmail.com'
+        name:    `${firstName} ${lastName}`.trim(),
+        time:    new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' }),
+        message: `📧 Email: ${email}\n📌 Reason: ${reason}\n\n${message}`,
       };
 
       try {
