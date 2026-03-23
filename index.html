@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>John Teye Lawer | Data,AI and Automation Specialist</title>
+  <title>John Teye Lawer | Data Analyst</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -249,53 +249,6 @@
     .skill-bar { height: 3px; background: rgba(255,255,255,0.08); margin-top: 0.5rem; }
     .skill-fill { height: 100%; background: var(--gold); transition: width 1.5s ease; }
 
-    /* EXPERIENCE */
-    #experience { background: var(--dark); }
-    .experience-content p {
-      color: var(--text-muted);
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-      font-size: 1rem;
-    }
-    .experience-content ul {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 2rem;
-    }
-    .experience-content li {
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 0.5rem;
-      position: relative;
-      padding-left: 1.5rem;
-    }
-    .experience-content li::before {
-      content: '•';
-      color: var(--gold);
-      position: absolute;
-      left: 0;
-    }
-    .experience-content h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--text);
-    }
-    .experience-content h4 {
-      font-size: 1rem;
-      color: var(--gold);
-      margin-bottom: 0.5rem;
-    }
-    .experience-content .job-title {
-      font-weight: 500;
-      color: var(--text);
-    }
-    .experience-content .job-details {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-    }
-
     /* PROJECTS */
     #projects { background: var(--dark); }
     .projects-grid {
@@ -496,7 +449,6 @@
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#tools">Tools</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -506,7 +458,7 @@
   <!-- HERO -->
   <section id="home">
     <div class="hero-text">
-      <div class="hero-tag">Data & AI Analytics Engineer · Ghana 🇬🇭</div>
+      <div class="hero-tag">Data Analyst · Ghana 🇬🇭</div>
       <h1 class="hero-name">John Teye<br/><span>Lawer</span></h1>
       <p class="hero-subtitle">
         Transforming raw data into meaningful insights that drive smarter business decisions. Specialising in statistical analysis, forecasting, and business intelligence.
@@ -564,50 +516,6 @@
           <div class="skill-name">SQL</div>
           <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="reveal">
-      <p class="section-label">Professional Background</p>
-      <h2 class="section-title">Experience & Skills</h2>
-      <div class="section-divider"></div>
-    </div>
-    <div class="experience-content reveal">
-      <h3>Professional Summary</h3>
-      <p>Results-driven Analytics Engineer & AI Solutions Developer with hands-on experience in building data-driven systems within the financial services sector. Skilled in designing data pipelines, predictive models, and intelligent automation solutions using Microsoft Azure and modern data platforms. Proven ability to translate complex business problems into actionable insights through data mining, machine learning, and visualization. Experienced in developing AI-powered assistants, automating enterprise workflows, and delivering scalable reporting solutions to support strategic decision-making.</p>
-      
-      <h3>Core Competencies</h3>
-      <ul>
-        <li>Data Mining & Statistical Analysis</li>
-        <li>Predictive Modelling & Forecasting</li>
-        <li>Data Engineering & ETL Pipelines</li>
-        <li>Azure Data Platforms & Microsoft Fabric</li>
-        <li>Business Intelligence & Data Visualisation</li>
-      </ul>
-      
-      <h3>Technical Skills</h3>
-      <p><strong>Languages & Tools:</strong> SQL, Python, Power BI, Power Automate, Microsoft Fabric</p>
-      <p><strong>Data Platforms:</strong> Azure SQL, Dataverse, SQL Server, Oracle, PostgreSQL</p>
-      <p><strong>Data Engineering:</strong> ETL Pipelines, Data Integration, On-prem to Cloud Migration, ODBC</p>
-      <p><strong>AI & Automation:</strong> Copilot Studio, Workflow Automation, API Integration</p>
-      <p><strong>Other:</strong> Excel (Advanced), SSIS, Oracle Data Modeler</p>
-      
-      <h3>Professional Experience</h3>
-      <div>
-        <h4 class="job-title">Data Analyst</h4>
-        <p class="job-details">Access Bank Ghana Plc, Accra | June 2024 – Present</p>
-        <ul>
-          <li>Designed and automated enterprise Power BI dashboards integrating Microsoft Dynamics CRM via Dataverse, improving visibility into customer and operational metrics.</li>
-          <li>Built predictive models to forecast daily contact centre call volumes and customer adoption trends (USSD and mobile banking platforms).</li>
-          <li>Developed a loan monitoring dashboard to track defaulters and zero-balance accounts, enabling proactive revenue recovery strategies.</li>
-          <li>Engineered a centralized data lakehouse (Microsoft Fabric) consolidating customer feedback data from multiple sources including CRM, Survey platforms, and core banking systems.</li>
-          <li>Implemented a hybrid data architecture using on-premise ODBC databases, Power BI Gateway, and Microsoft Fabric to deliver real-time reporting for contact centre performance.</li>
-          <li>Developed an AI-powered chatbot using Copilot Studio to assist staff with financial computations (loans, treasury bills, and fixed deposits), improving operational efficiency and decision speed.</li>
-          <li>Built a Power Automate-driven change management system to streamline IT service processes, ensuring auditability and process standardization.</li>
-        </ul>
       </div>
     </div>
   </section>
@@ -742,7 +650,35 @@
     </div>
   </footer>
 
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
   <script>
+    // ─── EmailJS Configuration ───────────────────────────────────────────────
+    // SETUP INSTRUCTIONS (one-time, 5 minutes):
+    // 1. Go to https://www.emailjs.com and create a FREE account
+    // 2. Click "Add New Service" → choose Gmail → connect johnkwao265@gmail.com
+    //    → copy the SERVICE ID and paste it below as YOUR_SERVICE_ID
+    // 3. Click "Email Templates" → "Create New Template"
+    //    Paste this as the template body:
+    //    -------------------------------------------------------
+    //    New message from: {{from_name}} ({{from_email}})
+    //    Reason: {{reason}}
+    //
+    //    {{message}}
+    //    -------------------------------------------------------
+    //    Set "To Email" to: johnkwao265@gmail.com
+    //    Set "Reply To": {{from_email}}
+    //    → Save and copy the TEMPLATE ID → paste below as YOUR_TEMPLATE_ID
+    // 4. Go to "Account" → copy your PUBLIC KEY → paste below as YOUR_PUBLIC_KEY
+    // ─────────────────────────────────────────────────────────────────────────
+
+    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz789'
+    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'aBcDeFgHiJkLmNoP'
+
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
     // Custom cursor
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
@@ -760,23 +696,51 @@
     }, { threshold: 0.12 });
     reveals.forEach(r => observer.observe(r));
 
-    // Contact form
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    // Contact form — sends email to johnkwao265@gmail.com via EmailJS
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-      const status = document.getElementById('formStatus');
+      const status   = document.getElementById('formStatus');
+      const submitBtn = this.querySelector('button[type="submit"]');
+
       const firstName = document.getElementById('firstName').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const reason = document.getElementById('reason').value;
-      const message = document.getElementById('message').value.trim();
+      const lastName  = document.getElementById('lastName').value.trim();
+      const email     = document.getElementById('email').value.trim();
+      const reason    = document.getElementById('reason').value;
+      const message   = document.getElementById('message').value.trim();
 
       if (!firstName || !email || !reason || !message) {
         status.className = 'form-status error';
         status.textContent = 'Please fill in all required fields.';
         return;
       }
-      status.className = 'form-status success';
-      status.textContent = `Thanks ${firstName}! Your message has been received. I'll get back to you soon.`;
-      this.reset();
+
+      // Disable button while sending
+      submitBtn.textContent = 'Sending…';
+      submitBtn.disabled = true;
+      status.className = 'form-status';
+      status.style.display = 'none';
+
+      const templateParams = {
+        from_name:  `${firstName} ${lastName}`.trim(),
+        from_email: email,
+        reason:     reason,
+        message:    message,
+        to_email:   'johnkwao265@gmail.com'
+      };
+
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+        status.className = 'form-status success';
+        status.textContent = `Thanks ${firstName}! Your message has been sent. I'll get back to you soon.`;
+        this.reset();
+      } catch (err) {
+        console.error('EmailJS error:', err);
+        status.className = 'form-status error';
+        status.textContent = 'Oops! Something went wrong. Please try again or email me directly at johnkwao265@gmail.com';
+      } finally {
+        submitBtn.textContent = 'Send Message →';
+        submitBtn.disabled = false;
+      }
     });
   </script>
 </body>
