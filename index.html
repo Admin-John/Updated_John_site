@@ -650,79 +650,83 @@
     </div>
   </footer>
 
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+ <!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ─── EmailJS Configuration ───────────────────────────────────────────────
+  const EMAILJS_SERVICE_ID  = 'service_5ov0v93';
+  const EMAILJS_TEMPLATE_ID = 'template_9s7jq3d';
+  const EMAILJS_PUBLIC_KEY  = 'Z1cI5NUdTPAqIjbff';
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
-  <script>
-    // ─── EmailJS Configuration ───────────────────────────────────────────────
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX - 6 + 'px';
+    cursor.style.top = e.clientY - 6 + 'px';
+    ring.style.left = e.clientX - 18 + 'px';
+    ring.style.top = e.clientY - 18 + 'px';
+  });
 
-    const EMAILJS_SERVICE_ID  = 'service_5ov0v93';
-    const EMAILJS_TEMPLATE_ID = 'template_9s7jq3d';
-    const EMAILJS_PUBLIC_KEY  = 'Z1cI5NUdTPAqIjbff';
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
 
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  // Contact form — sends email to johnkwao265@gmail.com via EmailJS
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const status   = document.getElementById('formStatus');
+    const submitBtn = this.querySelector('button[type="submit"]');
+    
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName  = document.getElementById('lastName').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const reason    = document.getElementById('reason').value;
+    const message   = document.getElementById('message').value.trim();
 
-    // Custom cursor
-    const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX - 6 + 'px';
-      cursor.style.top = e.clientY - 6 + 'px';
-      ring.style.left = e.clientX - 18 + 'px';
-      ring.style.top = e.clientY - 18 + 'px';
-    });
+    if (!firstName || !email || !reason || !message) {
+      status.className = 'form-status error';
+      status.textContent = 'Please fill in all required fields.';
+      status.style.display = 'block'; // ✅ SHOW ERROR
+      return;
+    }
 
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.12 });
-    reveals.forEach(r => observer.observe(r));
+    // Disable button while sending
+    submitBtn.textContent = 'Sending…';
+    submitBtn.disabled = true;
+    status.className = 'form-status';
+    status.textContent = '';
+    status.style.display = 'none'; // Hide old messages
 
-    // Contact form — sends email to johnkwao265@gmail.com via EmailJS
-    document.getElementById('contactForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const status   = document.getElementById('formStatus');
-      const submitBtn = this.querySelector('button[type="submit"]');
+    const templateParams = {
+      name:    `${firstName} ${lastName}`.trim(),
+      time:    new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' }),
+      message: `📧 Email: ${email}\n📌 Reason: ${reason}\n\n${message}`,
+    };
 
-      const firstName = document.getElementById('firstName').value.trim();
-      const lastName  = document.getElementById('lastName').value.trim();
-      const email     = document.getElementById('email').value.trim();
-      const reason    = document.getElementById('reason').value;
-      const message   = document.getElementById('message').value.trim();
-
-      if (!firstName || !email || !reason || !message) {
-        status.className = 'form-status error';
-        status.textContent = 'Please fill in all required fields.';
-        return;
-      }
-
-      // Disable button while sending
-      submitBtn.textContent = 'Sending…';
-      submitBtn.disabled = true;
-      status.className = 'form-status';
-      status.style.display = 'none';
-
-      const templateParams = {
-        name:    `${firstName} ${lastName}`.trim(),
-        time:    new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' }),
-        message: `📧 Email: ${email}\n📌 Reason: ${reason}\n\n${message}`,
-      };
-
-      try {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-        status.className = 'form-status success';
-        status.textContent = `Thanks ${firstName}! Your message has been sent. I'll get back to you soon.`;
-        this.reset();
-      } catch (err) {
-        console.error('EmailJS error:', err);
-        status.className = 'form-status error';
-        status.textContent = 'Oops! Something went wrong. Please try again or email me directly at johnkwao265@gmail.com';
-      } finally {
-        submitBtn.textContent = 'Send Message →';
-        submitBtn.disabled = false;
-      }
-    });
-  </script>
+    try {
+      const result = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+      console.log('✅ EmailJS Success:', result); // ✅ ADD LOGGING
+      
+      status.className = 'form-status success';
+      status.textContent = `Thanks ${firstName}! Your message has been sent. I'll get back to you soon.`;
+      status.style.display = 'block'; // ✅ SHOW SUCCESS
+      this.reset();
+    } catch (err) {
+      console.error('❌ EmailJS Error:', err); // ✅ BETTER ERROR LOGGING
+      
+      status.className = 'form-status error';
+      status.textContent = 'Oops! Something went wrong. Please try again or email me directly at johnkwao265@gmail.com';
+      status.style.display = 'block'; // ✅ SHOW ERROR
+    } finally {
+      submitBtn.textContent = 'Send Message →';
+      submitBtn.disabled = false;
+    }
+  });
+</script>
 </body>
 </html>
