@@ -650,7 +650,7 @@
     </div>
   </footer>
 
- <!-- EmailJS SDK -->
+<!-- EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   // ─── EmailJS Configuration ───────────────────────────────────────────────
@@ -658,7 +658,7 @@
   const EMAILJS_TEMPLATE_ID = 'template_9s7jq3d';
   const EMAILJS_PUBLIC_KEY  = 'Z1cI5NUdTPAqIjbff';
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-
+  
   // Custom cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
@@ -668,14 +668,14 @@
     ring.style.left = e.clientX - 18 + 'px';
     ring.style.top = e.clientY - 18 + 'px';
   });
-
+  
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.12 });
   reveals.forEach(r => observer.observe(r));
-
+  
   // Contact form — sends email to johnkwao265@gmail.com via EmailJS
   document.getElementById('contactForm').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -687,41 +687,43 @@
     const email     = document.getElementById('email').value.trim();
     const reason    = document.getElementById('reason').value;
     const message   = document.getElementById('message').value.trim();
-
+    
     if (!firstName || !email || !reason || !message) {
       status.className = 'form-status error';
       status.textContent = 'Please fill in all required fields.';
-      status.style.display = 'block'; // ✅ SHOW ERROR
+      status.style.display = 'block';
       return;
     }
-
+    
     // Disable button while sending
     submitBtn.textContent = 'Sending…';
     submitBtn.disabled = true;
     status.className = 'form-status';
     status.textContent = '';
-    status.style.display = 'none'; // Hide old messages
-
+    status.style.display = 'none';
+    
     const templateParams = {
       name:    `${firstName} ${lastName}`.trim(),
+      email:   email,   // ✅ ADDED - For Reply To field
+      title:   reason,  // ✅ ADDED - For Subject line
       time:    new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' }),
       message: `📧 Email: ${email}\n📌 Reason: ${reason}\n\n${message}`,
     };
-
+    
     try {
       const result = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-      console.log('✅ EmailJS Success:', result); // ✅ ADD LOGGING
+      console.log('✅ EmailJS Success:', result);
       
       status.className = 'form-status success';
       status.textContent = `Thanks ${firstName}! Your message has been sent. I'll get back to you soon.`;
-      status.style.display = 'block'; // ✅ SHOW SUCCESS
+      status.style.display = 'block';
       this.reset();
     } catch (err) {
-      console.error('❌ EmailJS Error:', err); // ✅ BETTER ERROR LOGGING
+      console.error('❌ EmailJS Error:', err);
       
       status.className = 'form-status error';
       status.textContent = 'Oops! Something went wrong. Please try again or email me directly at johnkwao265@gmail.com';
-      status.style.display = 'block'; // ✅ SHOW ERROR
+      status.style.display = 'block';
     } finally {
       submitBtn.textContent = 'Send Message →';
       submitBtn.disabled = false;
